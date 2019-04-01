@@ -1,7 +1,9 @@
 # Roarder
 Roarder create php loader class.
 # How to use
-	1. Download [sourceforge](https://sourceforge.net/projects/roarder/files/dev/Roarder.exe/download).
+[Download sourceforge](https://sourceforge.net/projects/roarder/files/dev/Roarder.exe/download)
+
+	1. [Download](https://sourceforge.net/projects/roarder/files/dev/Roarder.exe/download)
 	2. Set PATH system variable to Roarder.exe <require restart>.
 	3. Open CLI.
 	4. Set Config roarder.json.
