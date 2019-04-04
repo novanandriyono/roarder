@@ -1,13 +1,12 @@
 # Roarder
 Roarder create php loader class.
 # How to use
-[Download sourceforge](https://sourceforge.net/projects/roarder/files/dev/Roarder.exe/download)
+[![Download Roarder](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/roarder/files/latest/download)
+	
+	1. Download and install
+	2. Go to target directory
+	3. <shift+right click> Open command window here and type roarder
 
-	1. [Download](https://sourceforge.net/projects/roarder/files/dev/Roarder.exe/download)
-	2. Set PATH system variable to Roarder.exe <require restart>.
-	3. Open CLI.
-	4. Set Config roarder.json.
-	4. Type Variable on CLI ex roarder.
 # Config
 manual add file config roarder.json
     
@@ -29,7 +28,4 @@ manual add file config roarder.json
             2. all for recursive
     except: exclude string with regex and will combine with dir location
     
-this is not dependency manager like composer. 
-
-### How do I set or change the PATH system variable?
-	https://www.java.com/en/download/help/path.xml
+this is not dependency manager. just create autoloader from directory. 

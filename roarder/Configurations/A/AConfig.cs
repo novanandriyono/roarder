@@ -8,10 +8,13 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Text.RegularExpressions;
 using Roarder.Collections.Lists;
+using Roarder.Helpers;
 namespace Roarder.Configurations.A
 {
     abstract class AConfig
     {
+        private EnvHelper AEnvHelper = new EnvHelper();
+
         private readonly string ADS = Path.DirectorySeparatorChar.ToString();
 
         private readonly string AConfigFileName = "roarder.json";
@@ -26,7 +29,7 @@ namespace Roarder.Configurations.A
         
         private Dependencies ADependencies = new Dependencies();
 
-        private string AFullConfigPath() {
+        private string AFullConfigPath(){
             return this.AAppPath + this.ADS + this.AConfigFileName;
         }
 
@@ -77,31 +80,47 @@ namespace Roarder.Configurations.A
             }
 
             if (jsons["except"] != null){this.AExcept = jsons["except"].ToString();}
+            dynamic array = new JObject();
+
             if (jsons["dependencies"] != null){
                 if (jsons["dependencies"].GetType() == typeof(JArray)){
-                    dynamic array = new JObject();
                     array.dir = this.AAppPath;
                     array.except = this.AExcept;
                     array.option = this.AOption == SearchOption.AllDirectories ? "all" : "only";
-                    jsons["dependencies"][0].AddBeforeSelf(array);
-                    this.ADependencies = new Dependencies();
-                    foreach (JToken item in jsons["dependencies"])
+                    if (jsons["dependencies"].Count() == 0)
                     {
+                        array.dir = this.AAppPath;
+                        array.except = this.AExcept;
 
-                        Dependency dependency = new Dependency(item);
+                        Dependency dependency = new Dependency(array);
                         this.ADependencies.Add(dependency);
+                    }
+                    else {
+                        jsons["dependencies"][0].AddBeforeSelf(array);
+                        this.ADependencies = new Dependencies();
+                        foreach (JToken item in jsons["dependencies"])
+                        {
+                            Dependency dependency = new Dependency(item);
+                            this.ADependencies.Add(dependency);
+                        }
                     }
                 }
                 return this;
             }
             else {
-                dynamic array = new JObject();
                 array.dir = this.AAppPath;
                 array.except = this.AExcept;
                 array.option = this.AOption == SearchOption.AllDirectories ? "all" : "only";
                 Dependency dependency = new Dependency(array);
                 this.ADependencies.Add(dependency);
             }
+
+            if (this.ADependencies.Count() < 1) {
+                Console.WriteLine("Cant found classnames");
+                Console.ReadKey();
+                Environment.Exit(0);
+            }
+
             return this;
         }
      
@@ -136,9 +155,20 @@ namespace Roarder.Configurations.A
 
         private AConfig CreateAConfig() {
             Console.WriteLine("file roarder.json not found");
-            Console.WriteLine("see:https://github.com/novanandriyono/roarder");
+            Console.WriteLine("Creating roarder.json");
+            string filename = this.AAppPath + this.ADS + "roarder.json";
+            string configstr = "{\"except\": \"(\\\\[.].*$|.*\\\\vendor\\\\.*)\",\"option\": \"only\",\"dependencies\":[]}";
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
+            using (FileStream fs = File.Create(filename, 1024))
+            {
+                Byte[] info = new UTF8Encoding(true).GetBytes(configstr);
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
+            }
 
-            Console.ReadKey();
             return this;
         }
 

@@ -32,9 +32,6 @@ namespace Roarder.A
 
         protected AAppDomain GetAppDomain(string[] args = null) => this.GetAAppDomain(args);
         private AAppDomain GetAAppDomain(string[] args = null) {
-            Console.WriteLine("test");
-            Console.ReadKey();
-
             this.StrReplacer.Add("HEAD_CLASS", this.GetRandomStr().Substring(0, 10));
             this.StrReplacer.Add("init", this.GetRandomStr().Substring(0, 4));
             this.StrReplacer.Add("requireFile", this.GetRandomStr().Substring(0, 5));

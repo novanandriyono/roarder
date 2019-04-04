@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Roarder")]
-[assembly: AssemblyDescription("Php Class Loade")]
+[assembly: AssemblyDescription("Php Class Loader")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Novan Andriyono<evelynradtya@gmail.com>")]
 [assembly: AssemblyProduct("Roarder")]

@@ -10,7 +10,7 @@ using Roarder.Rx;
 using Roarder.Collections.Dictionaries;
 namespace Roarder.A
 {
-    class ADependency
+    abstract class ADependency
     {
         private SearchOption AOption = SearchOption.TopDirectoryOnly;
         private string AExcept;
