@@ -5,12 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Roarder.Collections.Dictionaries;
-using System.Reflection;
-using System.Runtime.InteropServices;
-
 namespace Roarder.Helpers.A
 {
-    class AEnvHelper
+    abstract class AEnvHelper
     {
         private readonly string keys = Path.GetRandomFileName().Replace(".","");
         private List<string> hr = new List<string>();
@@ -18,6 +15,7 @@ namespace Roarder.Helpers.A
         private readonly Char DS = Path.DirectorySeparatorChar;
         protected AEnvHelper SetEnvHelper() => this.SetAEnvHelper();
         private AEnvHelper SetAEnvHelper() {
+            
             foreach (string item in envs) {
                 string str = item + DS + "Roarder.exe";
                 if (item.Length == 0) {

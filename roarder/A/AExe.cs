@@ -2,7 +2,7 @@
 {
     abstract class AExe
     {
-        private AppDomain AppDomain = new AppDomain();
+        private AppMain AppDomain = new AppMain();
         protected AExe GetExe(string[] args) => this.GetAExe(args);
         private AExe GetAExe(string[] args) {
             return this;

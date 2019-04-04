@@ -55,7 +55,6 @@ namespace Roarder.A
             }
 
             this.AutoloaderDoc = this.AutoloaderDoc.Replace("SWLOCARRAY", MapIf);
-
             foreach (KeyValuePair<string, string> txts in StrReplacer)
             {
                 this.AutoloaderDoc = this.AutoloaderDoc.Replace(txts.Key, txts.Value);
@@ -70,9 +69,10 @@ namespace Roarder.A
             
             this.CreateMapFiles();
             this.CreateLoaderStart();
-            Console.ReadKey();
+            Console.WriteLine("Create loader {0} has success", StrReplacer["HEAD_CLASS"]);
             return this;
         }
+
         private string GetRandomStr()
         {
             string str = this.RandomStr();
@@ -119,12 +119,6 @@ namespace Roarder.A
                     // Add some information to the file.
                     fs.Write(info, 0, info.Length);
                 }
-                if (maps.Key.Equals(this.StrReplacer["HEAD_CLASS"])) {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine(filename);
-                    Console.ResetColor();
-                }
             }
         }
 
@@ -136,8 +130,5 @@ namespace Roarder.A
             }
             return new StrForMaps(this.RPS.ClassNameAndFileGroupsByLength[key]).str;
         }
-
-        
-
     }
 }

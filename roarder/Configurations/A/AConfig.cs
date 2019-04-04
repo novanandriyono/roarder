@@ -47,20 +47,19 @@ namespace Roarder.Configurations.A
             File.Exists(this.AAppPath + this.ADS + "roarder.php");
 
         private AConfig ReadAConfig(){
-            if (this.HasAConfig() != true) {
+            if (this.HasAConfig() != true){
                 return this.CreateAConfig();
             }
 
-            if (this.HasAutoLoaderDir == true) {
+            if(this.HasAutoLoaderDir == true){
                 Console.WriteLine("Found roarder directory");
                 Console.WriteLine("Deleting roader directory");
                 Directory.Delete(this.AAppPath + this.ADS + "roarder", true);
             }
 
-            if (this.HasAutoLoaderStart == true)
-            {
-                Console.WriteLine("Found roarder directory");
-                Console.WriteLine("Deleting roader directory");
+            if(this.HasAutoLoaderStart == true){
+                Console.WriteLine("Found roarder.php");
+                Console.WriteLine("Deleting roarder.php");
                 File.Delete(this.AAppPath + this.ADS + "roarder.php");
             }
 
@@ -68,7 +67,7 @@ namespace Roarder.Configurations.A
             if(jsons.HasValues != true){
                 Console.Write("Unvalid config");
                 Console.ReadKey();
-                return this;
+                Environment.Exit(0);
             }
             
             if (jsons["option"] == null) {
@@ -115,7 +114,7 @@ namespace Roarder.Configurations.A
                 this.ADependencies.Add(dependency);
             }
 
-            if (this.ADependencies.Count() < 1) {
+            if (this.ADependencies.Count() == 0) {
                 Console.WriteLine("Cant found classnames");
                 Console.ReadKey();
                 Environment.Exit(0);
